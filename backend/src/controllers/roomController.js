@@ -16,11 +16,15 @@ export const createRoom = async (req, res) => {
 export const joinRoom = async (req, res) => {
   try {
     const { code } = req.body;
+
+    console.log("code===>", req.body);
+
     const room = await Room.findOne({ code });
     if (!room) {
       return res.status(404).json({ message: "Room not found" });
     }
-    res
+    console.log("room====>", room);
+    return res
       .status(200)
       .json({ message: "Joined room successfully", roomCode: room.code });
   } catch (error) {
